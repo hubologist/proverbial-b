@@ -11,17 +11,20 @@ $(document).ready(function () {
     console.log("Document ready.");
 });
 
-$(document).keypress(function (e) {
-    if (e.which == 13) {
-        alert('You pressed enter!');
-    }
-});
-
 var source = 'source.json';
 
 var jqxhr = $.getJSON(source, function (json) {
-    var i = 4;
-    console.log(json[i]);
+    var i = 0;
+
+    $(document).keydown(function (e) {
+        if (e.which == 37 || e.which == 38) {
+            i--;
+            console.log(json[i]);
+        } else if (e.which == 39 || e.which == 40) {
+            i++;
+            console.log(json[i]);
+        }
+    });
 })
     .done(function () {
         console.log("Done.");
@@ -29,3 +32,4 @@ var jqxhr = $.getJSON(source, function (json) {
     .fail(function () {
         console.log("Error.");
     });
+
