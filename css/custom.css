@@ -1,9 +1,10 @@
 html {
     height: 100%;
+    background: rgb(6,6,6);
 }
 
 body {
-    background: #000;
+    background: url('../img/download.png') repeat;
     color: #fff;
     font-family: Quando, serif;
     height: 100%;
@@ -36,9 +37,14 @@ a:hover {
     text-align: center;
 }
 
+#proverb {
+    margin: 32px;
+}
+
 #credit {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     width: 100%;
     text-align: center;
     color: #333;
-    font-size: 8pt;
+    font-size: 10pt;
 }

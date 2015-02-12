@@ -1,26 +1,40 @@
-var source = 'source.txt';
+/* Keyboard controls
+ * left arrow	37
+ * up arrow	    38
+ * right arrow	39
+ * down arrow	40
+ *
+ * */
 
-function readTextFile(file, cb) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, true);
-    rawFile.onreadystatechange = function() {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status === 0)
-            {
-                var items = rawFile.responseText.split('+');
-                if(cb) cb(items);
-            }
-        }
-    };
-    rawFile.send(null);
-}
+$(document).ready(function () {
+    console.log("Ready.");
 
-var cb = function(result) {
-    document.getElementById('text').innerHTML=(
-        '<a href="javascript: readTextFile(source, cb);">'+
-        result[Math.floor(Math.random()*result.length)]
-        );
-};
+});
 
-readTextFile(source, cb);
+$(document).keypress(function (e) {
+    if (e.which == 13) {
+        alert('You pressed enter!');
+    }
+});
+
+var source = 'source.json';
+
+var jqxhr = $.getJSON("example.json", function () {
+    console.log("success");
+})
+    .done(function () {
+        console.log("second success");
+    })
+    .fail(function () {
+        console.log("error");
+    })
+    .always(function () {
+        console.log("complete");
+    });
+
+// Perform other work here ...
+
+// Set another completion function for the request above
+jqxhr.complete(function () {
+    console.log("second complete");
+});
