@@ -1,4 +1,5 @@
 /* Keyboard controls
+ *
  * left arrow	37
  * up arrow	    38
  * right arrow	39
@@ -7,8 +8,7 @@
  * */
 
 $(document).ready(function () {
-    console.log("Ready.");
-
+    console.log("Document ready.");
 });
 
 $(document).keypress(function (e) {
@@ -19,22 +19,13 @@ $(document).keypress(function (e) {
 
 var source = 'source.json';
 
-var jqxhr = $.getJSON("example.json", function () {
-    console.log("success");
+var jqxhr = $.getJSON(source, function (json) {
+    var i = 4;
+    console.log(json[i]);
 })
     .done(function () {
-        console.log("second success");
+        console.log("Done.");
     })
     .fail(function () {
-        console.log("error");
-    })
-    .always(function () {
-        console.log("complete");
+        console.log("Error.");
     });
-
-// Perform other work here ...
-
-// Set another completion function for the request above
-jqxhr.complete(function () {
-    console.log("second complete");
-});
