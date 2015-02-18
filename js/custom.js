@@ -35,6 +35,13 @@ function reset($elem) {
     return $newElem;
 }
 
+function animate($this, animation) {
+    $this.removeClass(animation);
+    $this = reset($this);
+    $this.addClass(animation);
+    $this.html(json[seed[i]]);
+}
+
 // Globals :( I know
 var source = 'source.json';
 
@@ -48,25 +55,44 @@ $.getJSON(source, function (json) {
     var i = 0;
     var seed = [];
 
+    // Building seed
     for (i = 0; i < json.length; i++) {
         seed[i] = i;
     }
 
+    // Randomizing seed
     seed = shuffle(seed);
 
+    // Initial proverb
     $("#proverb").html(json[seed[i - 1]]);
+
 
     $(document).keydown(function (e) {
         var $this = $("#proverb");
+        var animation = "";
+
+        switch(e.which) {
+            case 37:
+                animation = "fadeInRight animated";
+                break;
+            case 38:
+                animation = "fadeInDown animated";
+                break;
+            case 39:
+                animation = "fadeInLeft animated";
+                break;
+            case 40:
+                animation = "fadeInUp animated";
+                break;
+            default:
+                break;
+        }
         if (e.which == 37 || e.which == 38) {
             i--;
             if (i < 0) {
                 i = seed.length - 1;
             }
-            $this.removeClass();
-            $this = reset($this);
-            $this.addClass("fadeInDown animated");
-            $this.html(json[seed[i]]);
+            animate($("#proverb"), animation);
 
         } else if (e.which == 39 || e.which == 40) {
             i++;
@@ -75,7 +101,7 @@ $.getJSON(source, function (json) {
             }
             $this.removeClass();
             $this = reset($this);
-            $this.addClass("fadeInUp animated");
+            $this.addClass(animation);
             $this.html(json[seed[i]]);
         }
     });
