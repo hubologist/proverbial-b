@@ -71,34 +71,23 @@ $.getJSON(source, function (json) {
         var $this = $("#proverb");
         var animation = "";
 
-        switch(e.which) {
-            case 37:
-                animation = "fadeInRight animated";
-                break;
-            case 38:
-                animation = "fadeInDown animated";
-                break;
-            case 39:
-                animation = "fadeInLeft animated";
-                break;
-            case 40:
-                animation = "fadeInUp animated";
-                break;
-            default:
-                break;
-        }
         if (e.which == 37 || e.which == 38) {
             i--;
             if (i < 0) {
                 i = seed.length - 1;
             }
-            animate($("#proverb"), animation);
+            animation = "fadeIn animated";
+            $this.removeClass();
+            $this = reset($this);
+            $this.addClass(animation);
+            $this.html(json[seed[i]]);
 
         } else if (e.which == 39 || e.which == 40) {
             i++;
             if (i > seed.length - 1) {
                 i = 0;
             }
+            animation = "fadeIn animated";
             $this.removeClass();
             $this = reset($this);
             $this.addClass(animation);
